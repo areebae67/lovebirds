@@ -1,4 +1,4 @@
-import { useState } from "react";
+// No state needed as navigation is handled globally
 
 // ── Icons (inline SVG, no external deps) ─────────────────────────────────────
 const BellIcon = () => (
@@ -50,14 +50,14 @@ const CalendarIcon = () => (
   </svg>
 );
 const MusicNote = () => (
-  <svg width="18" height="18" fill="#c0392b" viewBox="0 0 24 24">
+  <svg width="18" height="18" fill="#e23d3d" viewBox="0 0 24 24">
     <path d="M9 18V5l12-2v13" />
     <circle cx="6" cy="18" r="3" />
     <circle cx="18" cy="16" r="3" />
   </svg>
 );
 const SunIcon = () => (
-  <svg width="20" height="20" fill="none" stroke="#3a9dd4" strokeWidth="2" viewBox="0 0 24 24">
+  <svg width="20" height="20" fill="none" stroke="#00bcd4" strokeWidth="2" viewBox="0 0 24 24">
     <circle cx="12" cy="12" r="5" />
     <line x1="12" y1="1" x2="12" y2="3" />
     <line x1="12" y1="21" x2="12" y2="23" />
@@ -70,250 +70,197 @@ const SunIcon = () => (
   </svg>
 );
 const PlusIcon = () => (
-  <svg width="18" height="18" fill="none" stroke="#c0392b" strokeWidth="2.5" viewBox="0 0 24 24">
+  <svg width="18" height="18" fill="none" stroke="#e23d3d" strokeWidth="2.5" strokeLinecap="round" viewBox="0 0 24 24">
     <line x1="12" y1="5" x2="12" y2="19" />
     <line x1="5" y1="12" x2="19" y2="12" />
   </svg>
 );
-const ImagesIcon = () => (
-  <svg width="22" height="22" fill="none" stroke="#c0392b" strokeWidth="2" viewBox="0 0 24 24">
+const ImagesIcon = ({ size = 26, color = "#e23d3d" }) => (
+  <svg width={size} height={size} fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
     <rect x="3" y="3" width="18" height="18" rx="2" />
     <circle cx="8.5" cy="8.5" r="1.5" />
     <polyline points="21 15 16 10 5 21" />
   </svg>
 );
-const BookOpenIcon = () => (
-  <svg width="22" height="22" fill="none" stroke="#c0392b" strokeWidth="2" viewBox="0 0 24 24">
+const BookOpenIcon = ({ size = 26, color = "#e23d3d" }) => (
+  <svg width={size} height={size} fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
     <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
     <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
   </svg>
 );
 const PinIcon = () => (
-  <svg width="26" height="26" fill="none" stroke="#c0392b" strokeWidth="2" viewBox="0 0 24 24">
-    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-    <circle cx="12" cy="10" r="3" fill="#c0392b" stroke="none" />
+  <svg width="24" height="24" fill="none" stroke="#e23d3d" strokeWidth="2.5" viewBox="0 0 24 24">
+    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" strokeLinecap="round" strokeLinejoin="round" />
+    <path d="M12 12c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z" fill="#e23d3d" stroke="none" />
   </svg>
 );
 
-// ── Data ──────────────────────────────────────────────────────────────────────
-const NAV = [
-  { label: "Home",      icon: <HomeIcon /> },
-  { label: "Messages",  icon: <MessageIcon /> },
-  { label: "Sanctuary", icon: <HeartIcon /> },
-  { label: "Vault",     icon: <BookIcon /> },
-  { label: "Profile",   icon: <UserIcon /> },
-];
+
 
 // ── Styles (inline to remain self-contained) ──────────────────────────────────
 const card = {
   backgroundColor: "#ffffff",
-  borderRadius: "20px",
-  boxShadow: "0 1px 6px rgba(0,0,0,0.06)",
+  borderRadius: "24px",
+  boxShadow: "0 1px 4px rgba(0,0,0,0.03)",
 };
 
 export default function Home() {
-  const [active, setActive] = useState("Home");
-
   return (
-    <div style={{ display: "flex", minHeight: "100vh", backgroundColor: "#ede8e0", fontFamily: "'Helvetica Neue', Arial, sans-serif" }}>
+    <div style={{ flex: 1, padding: "2rem 3rem 2rem 2rem", overflowY: "auto", display: "flex", flexDirection: "column", gap: "1.2rem" }}>
 
-      {/* ────────────────── Sidebar ────────────────── */}
-      <aside style={{ width: "210px", flexShrink: 0, display: "flex", flexDirection: "column", justifyContent: "space-between", padding: "1.5rem 0.85rem", backgroundColor: "#ede8e0" }}>
-
-        {/* Logo tile */}
-        <div>
-          <div style={{ width: "70px", height: "70px", backgroundColor: "#fff", borderRadius: "14px", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", marginBottom: "2rem", boxShadow: "0 1px 4px rgba(0,0,0,0.07)" }}>
-            <PinIcon />
-            <span style={{ fontSize: "0.5rem", fontWeight: 800, color: "#c0392b", letterSpacing: "0.12em", marginTop: "1px" }}>LOVEBIRDS</span>
-          </div>
-
-          {/* Nav links */}
-          <nav style={{ display: "flex", flexDirection: "column", gap: "2px" }}>
-            {NAV.map(({ label, icon }) => {
-              const isActive = active === label;
-              return (
-                <button
-                  key={label}
-                  onClick={() => setActive(label)}
-                  style={{
-                    display: "flex", alignItems: "center", gap: "0.7rem",
-                    padding: "0.6rem 0.9rem",
-                    borderRadius: "12px", border: "none", cursor: "pointer",
-                    fontSize: "0.9rem", fontWeight: isActive ? 600 : 400,
-                    color: isActive ? "#c0392b" : "#666",
-                    backgroundColor: isActive ? "#f5dcd9" : "transparent",
-                    transition: "background-color 0.15s",
-                    textAlign: "left", width: "100%",
-                  }}
-                >
-                  <span style={{ opacity: isActive ? 1 : 0.55 }}>{icon}</span>
-                  {label}
+          {/* Top bar */}
+          <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "0.5rem" }}>
+            <h1 style={{ margin: 0, fontSize: "1.6rem", fontWeight: 700, color: "#e23d3d", letterSpacing: "-0.02em" }}>Morning, Alex</h1>
+            <div style={{ display: "flex", gap: "1rem", color: "#888" }}>
+              {[<BellIcon key="bell" />, <GearIcon key="gear" />].map((ic, i) => (
+                <button key={i} style={{ background: "none", border: "none", cursor: "pointer", color: "inherit", padding: 0, display: "flex", transition: "color 0.2s" }} onMouseOver={e => e.currentTarget.style.color = '#333'} onMouseOut={e => e.currentTarget.style.color = '#888'}>
+                  {ic}
                 </button>
-              );
-            })}
-          </nav>
-        </div>
-
-        {/* Profile card */}
-        <div style={{ ...card, padding: "0.9rem 1rem" }}>
-          <div style={{ display: "flex", alignItems: "center", gap: "0.65rem" }}>
-            <div style={{ width: "36px", height: "36px", borderRadius: "50%", backgroundColor: "#b07070", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, overflow: "hidden" }}>
-              <span style={{ fontSize: "1.1rem" }}>🧑</span>
-            </div>
-            <div>
-              <p style={{ margin: 0, fontWeight: 600, fontSize: "0.85rem", color: "#2d2d2d" }}>Alex &amp; Sam</p>
-              <p style={{ margin: 0, fontSize: "0.7rem", color: "#999" }}>Day 432 together</p>
+              ))}
             </div>
           </div>
-        </div>
-      </aside>
 
-      {/* ────────────────── Main ────────────────── */}
-      <main style={{ flex: 1, padding: "1.6rem 1.75rem", overflowY: "auto", display: "flex", flexDirection: "column", gap: "0.9rem" }}>
+          {/* Row 1 ── Current Mood + Date Night */}
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 280px", gap: "1.2rem" }}>
 
-        {/* Top bar */}
-        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-          <h1 style={{ margin: 0, fontSize: "1.45rem", fontWeight: 700, color: "#c0392b" }}>Morning, Alex</h1>
-          <div style={{ display: "flex", gap: "0.6rem", color: "#666" }}>
-            {[<BellIcon key="bell" />, <GearIcon key="gear" />].map((ic, i) => (
-              <button key={i} style={{ background: "none", border: "none", cursor: "pointer", color: "#666", padding: "3px", display: "flex" }}>{ic}</button>
+            {/* Current Mood */}
+            <div className="card-hover" style={{ ...card, padding: "2rem", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+              <div>
+                {/* Badge */}
+                <div style={{ display: "inline-flex", alignItems: "center", gap: "0.4rem", backgroundColor: "rgba(226, 61, 61, 0.08)", borderRadius: "9999px", padding: "0.35rem 0.85rem", marginBottom: "1.2rem" }}>
+                  <HeartIcon filled color="#e23d3d" size={14} />
+                  <span style={{ fontSize: "0.8rem", fontWeight: 700, color: "#e23d3d" }}>Current Mood</span>
+                </div>
+                <p style={{ margin: "0 0 0.5rem", fontWeight: 700, fontSize: "1.1rem", color: "#1f1f1f" }}>Sam is thinking of you</p>
+                <p style={{ margin: 0, fontSize: "0.95rem", color: "#666", lineHeight: 1.6, maxWidth: "90%" }}>
+                  "Can't wait for our dinner tonight. Thinking about that Italian place we saw."
+                </p>
+              </div>
+              <div style={{ display: "flex", gap: "0.8rem", marginTop: "1.8rem" }}>
+                <button style={{ backgroundColor: "#e23d3d", color: "#fff", border: "none", borderRadius: "9999px", padding: "0.75rem 1.6rem", fontSize: "0.9rem", fontWeight: 600, cursor: "pointer", boxShadow: "0 4px 12px rgba(226, 61, 61, 0.25)" }}>
+                  Send Love
+                </button>
+                <button style={{ backgroundColor: "rgba(226, 61, 61, 0.08)", color: "#e23d3d", border: "none", borderRadius: "9999px", padding: "0.75rem 1.6rem", fontSize: "0.9rem", fontWeight: 600, cursor: "pointer", transition: "background 0.2s" }} onMouseOver={e => e.currentTarget.style.backgroundColor = 'rgba(226, 61, 61, 0.15)'} onMouseOut={e => e.currentTarget.style.backgroundColor = 'rgba(226, 61, 61, 0.08)'}>
+                  Write Note
+                </button>
+              </div>
+            </div>
+
+            {/* Date Night */}
+            <div className="card-hover" style={{ backgroundColor: "#e23d3d", borderRadius: "24px", padding: "2rem", color: "#fff", display: "flex", flexDirection: "column", justifyContent: "space-between", position: "relative", overflow: "hidden" }}>
+              <div style={{ position: "absolute", top: "-20px", right: "-20px", width: "120px", height: "120px", background: "radial-gradient(circle, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 70%)", borderRadius: "50%" }} />
+              <div style={{ position: "relative", zIndex: 1 }}>
+                <div style={{ width: "48px", height: "48px", borderRadius: "14px", backgroundColor: "rgba(255,255,255,0.25)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "1.2rem", backdropFilter: "blur(4px)" }}>
+                  <CalendarIcon />
+                </div>
+                <p style={{ margin: "0 0 0.4rem", fontWeight: 600, fontSize: "1.05rem" }}>Next Date Night</p>
+                <p style={{ margin: 0, fontSize: "0.9rem", opacity: 0.9 }}>Friday, Oct 24 • 7:00 PM</p>
+              </div>
+              <div style={{ position: "relative", zIndex: 1 }}>
+                <div style={{ height: "1px", backgroundColor: "rgba(255,255,255,0.3)", margin: "1.4rem 0 0.8rem" }} />
+                <p style={{ margin: 0, fontWeight: 600, fontSize: "0.95rem" }}>3 days to go</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Row 2 ── Memory + Music + Weather */}
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "1.2rem" }}>
+
+            {/* Shared Memory */}
+            <div className="card-hover" style={{ ...card, overflow: "hidden", display: "flex", flexDirection: "column", padding: "0.5rem" }}>
+              {/* Dark image area */}
+              <div style={{ position: "relative", flex: 1, minHeight: "150px", backgroundColor: "#0f172a", borderRadius: "20px", display: "flex", alignItems: "center", justifyContent: "center", overflow: "hidden" }}>
+                {/* Subtle starry background effect */}
+                <div style={{ position: "absolute", inset: 0, backgroundImage: "radial-gradient(circle at center, rgba(255,255,255,0.1) 0%, transparent 1px)", backgroundSize: "14px 14px" }} />
+                <div style={{ position: "absolute", top: "12px", left: "12px", backgroundColor: "#fff", color: "#1f1f1f", fontSize: "0.6rem", fontWeight: 700, letterSpacing: "0.08em", borderRadius: "9999px", padding: "4px 10px" }}>
+                  NEW IN VAULT
+                </div>
+                <div style={{ backgroundColor: "rgba(255,255,255,0.08)", backdropFilter: "blur(8px)", border: "1px solid rgba(255,255,255,0.1)", borderRadius: "14px", padding: "0.8rem 1.4rem", textAlign: "center", zIndex: 1 }}>
+                  <p style={{ margin: 0, fontSize: "0.65rem", fontWeight: 700, letterSpacing: "0.15em", color: "#e2e8f0", textTransform: "uppercase" }}>SHARED MEMORY</p>
+                  <p style={{ margin: "2px 0 0", fontSize: "0.6rem", letterSpacing: "0.1em", color: "#94a3b8", textTransform: "uppercase" }}>SAFE WORK</p>
+                </div>
+              </div>
+              <div style={{ padding: "0.8rem 0.5rem 0.5rem" }}>
+                <p style={{ margin: "0 0 0.25rem", fontWeight: 600, fontSize: "0.95rem", color: "#1f1f1f" }}>Sam added a new photo</p>
+                <p style={{ margin: 0, fontSize: "0.85rem", color: "#8a8a8a" }}>"From our walk last Sunday ✨"</p>
+              </div>
+            </div>
+
+            {/* Now Listening */}
+            <div className="card-hover" style={{ ...card, padding: "1.5rem", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+              <div>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "1rem" }}>
+                  <div style={{ width: "46px", height: "46px", borderRadius: "50%", backgroundColor: "rgba(226, 61, 61, 0.08)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                    <MusicNote />
+                  </div>
+                  <p style={{ margin: 0, fontSize: "0.65rem", fontWeight: 700, letterSpacing: "0.12em", color: "#a8a29e", textTransform: "uppercase", marginTop: "10px" }}>NOW LISTENING</p>
+                </div>
+                <p style={{ margin: "0 0 0.25rem", fontWeight: 600, fontSize: "1.05rem", color: "#1f1f1f" }}>Sweet Disposition</p>
+                <p style={{ margin: 0, fontSize: "0.9rem", color: "#8a8a8a" }}>The Temper Trap</p>
+              </div>
+              {/* Avatars + label */}
+              <div style={{ display: "flex", alignItems: "center", gap: "0.6rem", marginTop: "1.5rem" }}>
+                <div style={{ display: "flex" }}>
+                  {["#e23d3d", "#d6d3d1"].map((bg, i) => (
+                    <div key={i} style={{ width: "26px", height: "26px", borderRadius: "50%", backgroundColor: bg, border: "2px solid #fff", marginLeft: i ? "-8px" : 0, display: "flex", alignItems: "center", justifyContent: "center", fontSize: "0.6rem", color: i === 0 ? "#fff" : "#57534e", fontWeight: 700 }}>
+                      {i === 0 ? "S" : "A"}
+                    </div>
+                  ))}
+                </div>
+                <span style={{ fontSize: "0.75rem", color: "#a8a29e", fontWeight: 500 }}>Shared Playlist</span>
+              </div>
+            </div>
+
+            {/* Weather */}
+            <div className="card-hover" style={{ ...card, padding: "1.5rem", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+              <div>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", marginBottom: "1rem" }}>
+                  <div style={{ width: "46px", height: "46px", borderRadius: "50%", backgroundColor: "#e0f2fe", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                    <SunIcon />
+                  </div>
+                  <p style={{ margin: 0, fontSize: "0.65rem", fontWeight: 700, letterSpacing: "0.12em", color: "#a8a29e", textTransform: "uppercase", marginTop: "10px" }}>WEATHER</p>
+                </div>
+                <p style={{ margin: "0 0 0.25rem", fontWeight: 600, fontSize: "1.05rem", color: "#1f1f1f" }}>Sunny in London</p>
+                <p style={{ margin: 0, fontSize: "0.9rem", color: "#8a8a8a" }}>Perfect for that walk!</p>
+              </div>
+              {/* Battery */}
+              <div style={{ marginTop: "1.5rem" }}>
+                <div style={{ height: "6px", backgroundColor: "#f5f5f4", borderRadius: "9999px", overflow: "hidden", marginBottom: "0.5rem" }}>
+                  <div style={{ height: "100%", width: "72%", backgroundColor: "#0d9488", borderRadius: "9999px" }} />
+                </div>
+                <p style={{ margin: 0, fontSize: "0.75rem", color: "#a8a29e", fontWeight: 500 }}>Sam's battery: 72%</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Row 3 ── Sanctuary prompt */}
+          <div className="card-hover" style={{ backgroundColor: "#fdfcfa", border: "2px dashed rgba(226, 61, 61, 0.2)", borderRadius: "24px", padding: "2.2rem", textAlign: "center", cursor: "pointer", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
+            <div style={{ width: "44px", height: "44px", borderRadius: "50%", backgroundColor: "#fff", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "1rem", boxShadow: "0 2px 8px rgba(0,0,0,0.06)" }}>
+              <PlusIcon />
+            </div>
+            <p style={{ margin: "0 0 0.3rem", fontWeight: 600, fontSize: "1.05rem", color: "#1f1f1f" }}>Add to your Sanctuary</p>
+            <p style={{ margin: 0, fontSize: "0.95rem", color: "#8a8a8a" }}>Share a thought, a photo, or a dream for the future.</p>
+          </div>
+
+          {/* Row 4 ── Stats */}
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "1.2rem", marginBottom: "2rem" }}>
+            {[
+              { icon: <HeartIcon filled color="#e23d3d" size={26} />, value: "1,240", label: "Love Sparks Sent" },
+              { icon: <ImagesIcon />, value: "842", label: "Memories in Vault" },
+              { icon: <BookOpenIcon />, value: "12", label: "Active Chapters" },
+            ].map((s, i) => (
+              <div key={i} className="card-hover" style={{ ...card, padding: "1.5rem", display: "flex", alignItems: "center", gap: "1.2rem" }}>
+                <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+                  {s.icon}
+                </div>
+                <div>
+                  <p style={{ margin: "0 0 0.15rem", fontWeight: 700, fontSize: "1.5rem", color: "#1f1f1f", lineHeight: 1.1 }}>{s.value}</p>
+                  <p style={{ margin: 0, fontSize: "0.85rem", color: "#8a8a8a", fontWeight: 500 }}>{s.label}</p>
+                </div>
+              </div>
             ))}
           </div>
-        </div>
 
-        {/* Row 1 ── Current Mood + Date Night */}
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 270px", gap: "0.9rem" }}>
-
-          {/* Current Mood */}
-          <div style={{ ...card, padding: "1.4rem 1.5rem", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
-            <div>
-              {/* Badge */}
-              <div style={{ display: "inline-flex", alignItems: "center", gap: "0.4rem", backgroundColor: "#fce8e8", borderRadius: "9999px", padding: "0.28rem 0.8rem", marginBottom: "0.9rem" }}>
-                <HeartIcon filled color="#c0392b" size={12} />
-                <span style={{ fontSize: "0.75rem", fontWeight: 600, color: "#c0392b" }}>Current Mood</span>
-              </div>
-              <p style={{ margin: "0 0 0.3rem", fontWeight: 700, fontSize: "0.98rem", color: "#2d2d2d" }}>Sam is thinking of you</p>
-              <p style={{ margin: 0, fontSize: "0.88rem", color: "#777", lineHeight: 1.55 }}>
-                "Can't wait for our dinner tonight. Thinking about that Italian place we saw."
-              </p>
-            </div>
-            <div style={{ display: "flex", gap: "0.7rem", marginTop: "1.2rem" }}>
-              <button style={{ backgroundColor: "#c0392b", color: "#fff", border: "none", borderRadius: "9999px", padding: "0.58rem 1.4rem", fontSize: "0.87rem", fontWeight: 600, cursor: "pointer" }}>
-                Send Love
-              </button>
-              <button style={{ backgroundColor: "#fce8e8", color: "#c0392b", border: "none", borderRadius: "9999px", padding: "0.58rem 1.4rem", fontSize: "0.87rem", fontWeight: 600, cursor: "pointer" }}>
-                Write Note
-              </button>
-            </div>
-          </div>
-
-          {/* Date Night */}
-          <div style={{ backgroundColor: "#c0392b", borderRadius: "20px", padding: "1.4rem 1.5rem", color: "#fff", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
-            <div>
-              <div style={{ width: "42px", height: "42px", borderRadius: "50%", backgroundColor: "rgba(255,255,255,0.22)", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "0.9rem" }}>
-                <CalendarIcon />
-              </div>
-              <p style={{ margin: "0 0 0.35rem", fontWeight: 600, fontSize: "0.97rem" }}>Next Date Night</p>
-              <p style={{ margin: 0, fontSize: "0.86rem", opacity: 0.85 }}>Friday, Oct 24 • 7:00 PM</p>
-            </div>
-            <div>
-              <div style={{ height: "1px", backgroundColor: "rgba(255,255,255,0.25)", margin: "1rem 0 0.7rem" }} />
-              <p style={{ margin: 0, fontWeight: 600, fontSize: "0.93rem", opacity: 0.92 }}>3 days to go</p>
-            </div>
-          </div>
-        </div>
-
-        {/* Row 2 ── Memory + Music + Weather */}
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "0.9rem" }}>
-
-          {/* Shared Memory */}
-          <div style={{ ...card, overflow: "hidden" }}>
-            {/* Dark image area */}
-            <div style={{ position: "relative", height: "176px", backgroundColor: "#181825", display: "flex", alignItems: "center", justifyContent: "center" }}>
-              <div style={{ position: "absolute", top: "11px", left: "11px", backgroundColor: "#c0392b", color: "#fff", fontSize: "0.6rem", fontWeight: 700, letterSpacing: "0.07em", borderRadius: "6px", padding: "3px 8px" }}>
-                NEW IN VAULT
-              </div>
-              <div style={{ backgroundColor: "#2d2d3a", borderRadius: "10px", padding: "0.7rem 1.1rem", textAlign: "center" }}>
-                <p style={{ margin: 0, fontSize: "0.6rem", fontWeight: 700, letterSpacing: "0.15em", color: "#aaa", textTransform: "uppercase" }}>SHARED MEMORY</p>
-                <p style={{ margin: "2px 0 0", fontSize: "0.54rem", letterSpacing: "0.1em", color: "#666", textTransform: "uppercase" }}>SAFE WORK</p>
-              </div>
-            </div>
-            <div style={{ padding: "0.85rem 1rem" }}>
-              <p style={{ margin: "0 0 0.18rem", fontWeight: 600, fontSize: "0.87rem", color: "#2d2d2d" }}>Sam added a new photo</p>
-              <p style={{ margin: 0, fontSize: "0.76rem", color: "#888" }}>"From our walk last Sunday ✨"</p>
-            </div>
-          </div>
-
-          {/* Now Listening */}
-          <div style={{ ...card, padding: "1.2rem", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
-            <div>
-              <p style={{ margin: "0 0 0.9rem", fontSize: "0.66rem", fontWeight: 700, letterSpacing: "0.1em", color: "#aaa", textTransform: "uppercase" }}>NOW LISTENING</p>
-              <div style={{ width: "42px", height: "42px", borderRadius: "50%", backgroundColor: "#fce8e8", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "0.8rem" }}>
-                <MusicNote />
-              </div>
-              <p style={{ margin: "0 0 0.2rem", fontWeight: 700, fontSize: "0.97rem", color: "#2d2d2d" }}>Sweet Disposition</p>
-              <p style={{ margin: 0, fontSize: "0.8rem", color: "#888" }}>The Temper Trap</p>
-            </div>
-            {/* Avatars + label */}
-            <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginTop: "0.9rem" }}>
-              <div style={{ display: "flex" }}>
-                {["#c0392b", "#3a7bd5"].map((bg, i) => (
-                  <div key={i} style={{ width: "22px", height: "22px", borderRadius: "50%", backgroundColor: bg, border: "2px solid #fff", marginLeft: i ? "-7px" : 0, display: "flex", alignItems: "center", justifyContent: "center", fontSize: "0.52rem", color: "#fff", fontWeight: 700 }}>
-                    {i === 0 ? "S" : "A"}
-                  </div>
-                ))}
-              </div>
-              <span style={{ fontSize: "0.7rem", color: "#888" }}>Shared Playlist</span>
-            </div>
-          </div>
-
-          {/* Weather */}
-          <div style={{ ...card, padding: "1.2rem", display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
-            <div>
-              <p style={{ margin: "0 0 0.9rem", fontSize: "0.66rem", fontWeight: 700, letterSpacing: "0.1em", color: "#aaa", textTransform: "uppercase" }}>WEATHER</p>
-              <div style={{ width: "42px", height: "42px", borderRadius: "50%", backgroundColor: "#e6f4fb", display: "flex", alignItems: "center", justifyContent: "center", marginBottom: "0.8rem" }}>
-                <SunIcon />
-              </div>
-              <p style={{ margin: "0 0 0.2rem", fontWeight: 700, fontSize: "0.97rem", color: "#2d2d2d" }}>Sunny in London</p>
-              <p style={{ margin: 0, fontSize: "0.8rem", color: "#888" }}>Perfect for that walk!</p>
-            </div>
-            {/* Battery */}
-            <div style={{ marginTop: "0.9rem" }}>
-              <div style={{ height: "5px", backgroundColor: "#e5ede5", borderRadius: "9999px", overflow: "hidden", marginBottom: "0.35rem" }}>
-                <div style={{ height: "100%", width: "72%", backgroundColor: "#4a9e5c", borderRadius: "9999px" }} />
-              </div>
-              <p style={{ margin: 0, fontSize: "0.7rem", color: "#aaa" }}>Sam's battery: 72%</p>
-            </div>
-          </div>
-        </div>
-
-        {/* Row 3 ── Sanctuary prompt */}
-        <div style={{ backgroundColor: "#f5efe7", border: "1.5px dashed #cfc0ad", borderRadius: "20px", padding: "1.6rem", textAlign: "center", cursor: "pointer" }}>
-          <div style={{ width: "38px", height: "38px", borderRadius: "50%", border: "1.5px solid #c0392b", display: "flex", alignItems: "center", justifyContent: "center", margin: "0 auto 0.7rem" }}>
-            <PlusIcon />
-          </div>
-          <p style={{ margin: "0 0 0.2rem", fontWeight: 600, fontSize: "0.93rem", color: "#2d2d2d" }}>Add to your Sanctuary</p>
-          <p style={{ margin: 0, fontSize: "0.8rem", color: "#999" }}>Share a thought, a photo, or a dream for the future.</p>
-        </div>
-
-        {/* Row 4 ── Stats */}
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: "0.9rem" }}>
-          {[
-            { icon: <HeartIcon filled color="#c0392b" size={22} />, value: "1,240", label: "Love Sparks Sent" },
-            { icon: <ImagesIcon />, value: "842",   label: "Memories in Vault" },
-            { icon: <BookOpenIcon />, value: "12",   label: "Active Chapters" },
-          ].map((s, i) => (
-            <div key={i} style={{ ...card, padding: "1.1rem 1.3rem", display: "flex", alignItems: "center", gap: "0.9rem" }}>
-              <span style={{ flexShrink: 0 }}>{s.icon}</span>
-              <div>
-                <p style={{ margin: "0 0 0.12rem", fontWeight: 700, fontSize: "1.3rem", color: "#2d2d2d" }}>{s.value}</p>
-                <p style={{ margin: 0, fontSize: "0.76rem", color: "#999" }}>{s.label}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-
-      </main>
     </div>
   );
 }
