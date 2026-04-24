@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function MessagesPage() {
+export default function MessagesPage({ setPage }) {
     return (
         <>
             {/* Fixed Sidebar (SideNavBar) */}
@@ -13,19 +13,20 @@ export default function MessagesPage() {
                 </div>
 
                 <nav className="flex-1 space-y-2">
-                    <a
-                        className="text-stone-600 px-6 py-3 hover:text-[#E23D3D] transition-all duration-300 flex items-center gap-4 group scale-95 active:scale-90"
-                        href="#"
+                    {/* Home */}
+                    <button
+                        onClick={() => setPage("home")}
+                        className="w-full text-left text-stone-600 px-6 py-3 hover:text-[#E23D3D] transition-all duration-300 flex items-center gap-4 group scale-95 active:scale-90"
                     >
                         <span className="material-symbols-outlined">home</span>
                         <span className="font-['Plus_Jakarta_Sans'] text-sm font-medium tracking-tight">
                             Home
                         </span>
-                    </a>
+                    </button>
 
-                    <a
-                        className="bg-[#E23D3D]/10 text-[#E23D3D] font-semibold rounded-full px-6 py-3 flex items-center gap-4 scale-95 active:scale-90 transition-transform"
-                        href="#"
+                    {/* Messages (Current Page) */}
+                    <button
+                        className="w-full text-left bg-[#E23D3D]/10 text-[#E23D3D] font-semibold rounded-full px-6 py-3 flex items-center gap-4 scale-95 active:scale-90 transition-transform"
                     >
                         <span
                             className="material-symbols-outlined"
@@ -36,37 +37,40 @@ export default function MessagesPage() {
                         <span className="font-['Plus_Jakarta_Sans'] text-sm font-medium tracking-tight">
                             Messages
                         </span>
-                    </a>
+                    </button>
 
-                    <a
-                        className="text-stone-600 px-6 py-3 hover:text-[#E23D3D] transition-all duration-300 flex items-center gap-4 group scale-95 active:scale-90"
-                        href="#"
+                    {/* Sanctuary */}
+                    <button
+                        onClick={() => setPage("sanctuary")}
+                        className="w-full text-left text-stone-600 px-6 py-3 hover:text-[#E23D3D] transition-all duration-300 flex items-center gap-4 group scale-95 active:scale-90"
                     >
                         <span className="material-symbols-outlined">favorite</span>
                         <span className="font-['Plus_Jakarta_Sans'] text-sm font-medium tracking-tight">
                             Sanctuary
                         </span>
-                    </a>
+                    </button>
 
-                    <a
-                        className="text-stone-600 px-6 py-3 hover:text-[#E23D3D] transition-all duration-300 flex items-center gap-4 group scale-95 active:scale-90"
-                        href="#"
+                    {/* Vault */}
+                    <button
+                        onClick={() => setPage("vault")}
+                        className="w-full text-left text-stone-600 px-6 py-3 hover:text-[#E23D3D] transition-all duration-300 flex items-center gap-4 group scale-95 active:scale-90"
                     >
                         <span className="material-symbols-outlined">auto_stories</span>
                         <span className="font-['Plus_Jakarta_Sans'] text-sm font-medium tracking-tight">
                             Vault
                         </span>
-                    </a>
+                    </button>
 
-                    <a
-                        className="text-stone-600 px-6 py-3 hover:text-[#E23D3D] transition-all duration-300 flex items-center gap-4 group scale-95 active:scale-90"
-                        href="#"
+                    {/* Profile */}
+                    <button
+                        onClick={() => setPage("profile")}
+                        className="w-full text-left text-stone-600 px-6 py-3 hover:text-[#E23D3D] transition-all duration-300 flex items-center gap-4 group scale-95 active:scale-90"
                     >
                         <span className="material-symbols-outlined">person</span>
                         <span className="font-['Plus_Jakarta_Sans'] text-sm font-medium tracking-tight">
                             Profile
                         </span>
-                    </a>
+                    </button>
                 </nav>
             </aside>
 
