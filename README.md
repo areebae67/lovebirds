@@ -1,16 +1,62 @@
-# React + Vite
+LoveBirds
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A private digital space designed for two people —
+to share thoughts, memories, moods, and moments that actually matter.
 
-Currently, two official plugins are available:
+✨ About the Project
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+In a world full of fast communication — texts, reels, reactions —
+something still feels missing.
 
-## React Compiler
+LoveBirds is my attempt to create a more intentional space for connection.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+This is my first step into building a real product, where I focused not just on functionality, but also on emotion, design, and user experience.
 
-## Expanding the ESLint configuration
+🎯 Features
+💌 Personal mood sharing
+🖼️ Shared memory vault
+💬 Private messaging space
+🌙 Calm, minimal, love-themed UI
+🎨 UI Preview
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+![Home Screen](<img width="1600" height="1452" alt="screen" src="https://github.com/user-attachments/assets/aeba38f1-7041-4605-866b-dc553bb6a489" />)
+![Messages Screen](<img width="1600" height="1545" alt="messages" src="https://github.com/user-attachments/assets/59614704-9143-450d-acf1-a156efe4f74a" />)
+
+🛠️ Tech Stack
+React
+JavaScript
+CSS (custom styling) 
+Supabase
+
+🚀 Getting Started
+
+Clone the repo:
+
+git clone https://github.com/your-username/lovebirds.git
+
+Install dependencies:
+
+npm install
+
+Run the app:
+
+npm run dev
+
+🌱 Why I Built This
+
+Instead of just learning concepts,
+I wanted to learn by building something meaningful.
+
+This project represents:
+
+my start in frontend + UI/UX development
+my interest in emotional, human-centered design
+my goal to build products that actually feel different
+
+📌 Status
+
+ Work in progress — actively improving UI, features, and experience
+
+💭 Feedback
+
+If this idea resonates with you, I’d love to hear your thoughts.
